@@ -11,7 +11,8 @@ module Omniauth
       option :client_options, {
         site: 'https://api.zoom.us',
         authorize_url: 'https://zoom.us/oauth/authorize',
-        token_url: 'https://zoom.us/oauth/token'
+        token_url: 'https://zoom.us/oauth/token',
+        scope: 'user:write:admin, user:read:admin, user:read, user:write, zms:user:write, user_profile, zms:user:read'
       }
 
       def request_phase
@@ -25,7 +26,8 @@ module Omniauth
       uid { raw_info['id'] }
 
       def raw_info
-        @raw_info ||= access_token.get('/v2/users/me').parsed
+        @raw_info ||=
+          access_token.get('/v2/users/me').parsed
       end
 
       def callback_url

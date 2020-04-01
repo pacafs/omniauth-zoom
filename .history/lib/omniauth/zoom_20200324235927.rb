@@ -6,12 +6,12 @@ module Omniauth
   module Strategies
     class Zoom < OmniAuth::Strategies::OAuth2
       include OmniAuth::Strategy
-      option :name, :zoom
 
       option :client_options, {
         site: 'https://api.zoom.us',
         authorize_url: 'https://zoom.us/oauth/authorize',
-        token_url: 'https://zoom.us/oauth/token'
+        token_url: 'https://zoom.us/oauth/token',
+        redirect_uri: 'https://usefyi-v2.ngrok.io/users/auth/zoom/callback'
       }
 
       def request_phase
@@ -25,11 +25,8 @@ module Omniauth
       uid { raw_info['id'] }
 
       def raw_info
-        @raw_info ||= access_token.get('/v2/users/me').parsed
-      end
-
-      def callback_url
-        full_host + script_name + callback_path
+        @raw_info ||=
+          access_token.get('/v2/users/me').parsed
       end
     end
   end

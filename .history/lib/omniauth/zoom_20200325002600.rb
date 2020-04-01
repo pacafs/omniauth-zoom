@@ -25,7 +25,8 @@ module Omniauth
       uid { raw_info['id'] }
 
       def raw_info
-        @raw_info ||= access_token.get('/v2/users/me').parsed
+        # @raw_info ||=
+        #   access_token.get('/v2/users/me').parsed
       end
 
       def callback_url
