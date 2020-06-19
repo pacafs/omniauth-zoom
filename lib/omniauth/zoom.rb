@@ -29,10 +29,9 @@ module Omniauth
       end
 
       def callback_url
-        #full_host + script_name + callback_path
         redirect_uri = full_host + script_name + callback_path
         uri = URI.parse(redirect_uri)
-        uri.scheme = 'http'
+        uri.scheme = 'https'
         uri.to_s
       end
     end
